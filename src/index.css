@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Merriweather Sans", sans-serif;
+  background-color: var(--clr-blue-bg);
+  color: rgb(0, 0, 0);
+}
+
+/* variables personalizadas */
+:root {
+  --clr-blue-bg: #F9F9F9;
+
+  --container-padding: 1.5rem;
+
+  --clr-bg-dark: rgb(26, 26, 26);
+
+  --clr-text-black: black;
+
+  --fs-1: 96px;
+  --fs-2: 60px;
+  --fs-3: 48px;
+  --fs-4: 34px;
+  --fs-5: 24px;
+  --fs-6: 20px;
+  --fs-7: 16px;
+  --fs-8: 14px;
+  --fs-9: 12px;
+  --fs-10: 10px;
+}
+
+
+/* estilos generales */
+a {
+  text-decoration: none;
+  color: var(--clr-bg-black);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* container padding */
+.container {
+  padding: var(--container-padding);
+}
+
+/* navbar */
+.primary-navbar {
+  display: grid;
+}
+
+.toggle-scroll { /*para ponerle al body y que no se puede scrollear durante el nav abierto */
+  overflow: hidden;
+}
+
+.toggle-and-logo {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  transition: opacity 400ms ease-in-out;
+}
+
+.toggle-and-logo.active { /* para que desaparezca el de abajo y aparezca el del abierto. le da un efecto piola */
+  opacity: 0;
+}
+
+.toggle-icon {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-icon span { /* para crear la barrita del medio del hamburguer menu */
+  width: 30px;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 300ms ease-in-out;
+}
+
+.toggle-icon.active span {
+  opacity: 0;
+}
+
+.toggle-icon::before, 
+.toggle-icon::after { /*para crear los palitos del hamburguer menu */
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  transition: transform 300ms ease-in-out;
+}
+
+.toggle-icon::before {
+  transform: translateY(-7px);
+}
+.toggle-icon::after {
+  transform: translateY(7px);
+}
+
+.toggle-icon.active::before {
+  transform: rotateZ(45deg);
+}
+
+.toggle-icon.active::after {
+  transform: rotateZ(-45deg);
+}
+
+.logo-nav {
+  margin: 0 auto;
+  width: 45px;
+  height: 45px;
+}
+/* .logo-nav.active {
+  z-index: 11;
+} */
+
+/* navbar list en mobile */
+.navbar-tabs { /* vendría a ser lo que tiene posición absoluta y pasa a ocupar toda la pantalla cuando está abierto el navbar*/
+  z-index: -1;
+  opacity: 0;
+  position: absolute;
+  background-color: #F9F9F9;
+  inset: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  transition: all 300ms ease-in-out;
+}
+.navbar-tabs.active {
+  z-index: 10;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  overflow: auto;
+  display: block;
+}
+
+.labels-container {
+  margin-top: 3rem;
+}
+
+.single-label-container {
+  position: relative;
+}
+
+.label {
+  padding: 0.7rem var(--container-padding);
+  text-transform: uppercase;
+}
+
+.label-link {
+  position: absolute;
+  inset: 0;
+}
+.label-link:hover + .label {
+  background-color: #F9F9F9;
+}
+
+.redes-sociales-navbar {  /* iconos de redes sociales cuando se abre el navbar, se va a tener que quitar en tamaño grande */
+  margin: 5rem 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.redes-sociales-navbar a, img {
+  width: 25px;
+  height: 25px;
+}
+
+
+
+/* footer */
+
+.footer-container {
+  margin-top: 2rem;
+  padding-block: 2rem;
+  background-color: grey;
+  position: relative;
+}
+
+.logo-footer {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 80px;
+}
+
+.footer-section {
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 10px;
+}
+
+.footer-titulo {
+  font-size: var(--fs-6);
+  font-weight: 700;
+  margin: 0;
+}
+.footer-section a {
+  font-size: var(--fs-8);
+  font-weight: 400;
+}
+.footer-podcasts {
+  display: none;
+}
+
+.redes-sociales > * {
+  filter: brightness(0) saturate(100%);
+}
+
+.redes-sociales {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+@media (min-width: 850px) {
+  :root {
+    --container-padding: 2.5rem;
+  }
+  .logo-footer {
+    align-self: start;
+    margin: 0;
+    position: relative;
+    top: 2rem;
+    left: var(--container-padding);
+  }
+  .footer-podcasts {
+    display: grid;
+  }
+  .footer-container {
+    padding-block: 3.5rem;
+    display: grid;
+    grid-template-columns: 35% 1fr 20% 15%;
+    gap: 40px;
+  }
+  .redes-sociales {
+    align-items: start;
+    justify-content: start;
+  }
+}
+
+@media (min-width: 800px) {
+  .primary-navbar {
+    display: block;
+    padding: 0 var(--container-padding);
+  }
+  .toggle-icon {
+    display: none;
+  }
+  .toggle-and-logo {
+    display: none;
+  }
+  .toggle-and-logo-abierto {
+    padding: 0;
+    margin: 0;
+    height: min-content;
+    width: min-content;
+    display: block;
+  }
+  .logo-nav-abierto {
+    display: block;
+    margin: 0;
+  }
+  .redes-sociales-navbar {
+    display: none;
+  }
+  .navbar-tabs {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 100%; */
+    gap: 10rem;
+  }
+  .navbar-tabs.active {
+    display: flex;
+  }
+  .labels-container {
+    margin: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: 1fr;
+  }
+  .label {
+    font-size: var(--fs-8);
+    text-align: center;
+    background-color: #F9F9F9;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+  .label-link:hover + .label {
+    background-color: #F9F9F9;
+  }
+  .label-link:focus + .label {
+    background-color: #F9F9F9;
+  } 
+}
